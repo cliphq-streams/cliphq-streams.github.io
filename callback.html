@@ -1,0 +1,41 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Unbounded:wght@700;800&display=swap"><link rel="stylesheet" href="style.css"><link rel="icon" href="favicon.svg"><title>Connected — ClipHQ</title><meta name="robots" content="noindex"></head><body>
+<header class="top"><div class="wrap"><a class="brand" href="index.html"><svg width="28" height="28" viewBox="0 0 560 560" aria-hidden="true"><g fill="none" stroke="#fff" stroke-width="52" stroke-linecap="round" stroke-linejoin="round"><path d="M 40 170 V 76 A 36 36 0 0 1 76 40 H 170"/><path d="M 390 40 H 484 A 36 36 0 0 1 520 76 V 170"/><path d="M 520 390 V 484 A 36 36 0 0 1 484 520 H 390"/><path d="M 170 520 H 76 A 36 36 0 0 1 40 484 V 390"/></g><path d="M 216 180 L 216 380 L 392 280 Z" fill="#8B6CFF" stroke="#8B6CFF" stroke-width="52" stroke-linejoin="round"/></svg><span>CLIP<b>HQ</b></span></a><nav class="top" aria-label="Site"><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></nav></div></header>
+<main class="wrap legal">
+<div class="card" id="ok" hidden>
+<h1 style="font-size:32px">Account connected</h1>
+<p>Copy this code and paste it into Terminal, where clipforge is waiting for it.</p>
+<output class="code" id="code" aria-live="polite"></output>
+<button class="copy" id="copy" type="button">Copy code</button>
+<p style="color:var(--muted);margin-top:20px;font-size:15px">The code works once and expires in a few minutes. You can close this tab after pasting it.</p>
+</div>
+<div class="card" id="bad" hidden>
+<h1 style="font-size:32px">Connection didn't finish</h1>
+<p class="error" id="err"></p>
+<p>Go back to Terminal and run the connect command again, then approve every permission on the next screen.</p>
+</div>
+<div class="card" id="none" hidden>
+<h1 style="font-size:32px">Nothing to connect</h1>
+<p>This page shows a code after you approve clipforge on TikTok or Google. Start from the command in Terminal.</p>
+</div>
+</main>
+<footer><div class="wrap"><span>© 2026 ClipHQ</span><span><a href="privacy.html">Privacy Policy</a> &nbsp; <a href="terms.html">Terms of Service</a> &nbsp; <a href="mailto:yuripat999@gmail.com">yuripat999@gmail.com</a></span></div></footer>
+<script>
+(function(){
+  var q=new URLSearchParams(location.search);
+  var code=q.get('code'), err=q.get('error'), desc=q.get('error_description');
+  if(code){
+    document.getElementById('ok').hidden=false;
+    document.getElementById('code').textContent=code;
+    var b=document.getElementById('copy');
+    b.addEventListener('click',function(){
+      navigator.clipboard.writeText(code).then(function(){b.textContent='Copied';});
+    });
+  } else if(err){
+    document.getElementById('bad').hidden=false;
+    document.getElementById('err').textContent=(desc||err);
+  } else {
+    document.getElementById('none').hidden=false;
+  }
+})();
+</script>
+</body></html>
